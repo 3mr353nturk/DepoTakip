@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DepoDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DepoDb.dbo.tbl_cari' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_cari">
+          <Key>
+            <PropertyRef Name="ID_CARI" />
+          </Key>
+          <Property Name="ID_CARI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CARI_TUR" Type="int" />
+          <Property Name="AD" Type="varchar" MaxLength="100" />
+          <Property Name="SOYAD" Type="varchar" MaxLength="100" />
+          <Property Name="TC_KIMLIK_NO" Type="varchar" MaxLength="11" />
+          <Property Name="TEL_NO" Type="varchar" MaxLength="11" />
+          <Property Name="EKLEYEN_KULLANICI" Type="int" />
+          <Property Name="EKLEME_TARIHI" Type="datetime" />
+          <Property Name="ID_DUZENLEYEN" Type="int" />
+          <Property Name="E_POSTA" Type="varchar" MaxLength="100" />
+          <Property Name="DUZENLEME_TARIHI" Type="datetime" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_cari_tur">
+          <Key>
+            <PropertyRef Name="ID_CARI_TUR" />
+          </Key>
+          <Property Name="ID_CARI_TUR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_depo">
+          <Key>
+            <PropertyRef Name="ID_DEPO" />
+          </Key>
+          <Property Name="ID_DEPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="100" />
+          <Property Name="TELEFON" Type="varchar" MaxLength="11" />
+          <Property Name="FAX" Type="varchar" MaxLength="11" />
+          <Property Name="E_POSTA" Type="varchar" MaxLength="100" />
+          <Property Name="ADRES" Type="varchar" MaxLength="200" />
+          <Property Name="ID_EKLEYEN" Type="int" />
+          <Property Name="EKLEME_TARIHI" Type="datetime" />
+          <Property Name="ID_DUZENLEYEN" Type="int" />
+          <Property Name="DUZENLEME_TARIHI" Type="datetime" />
+          <Property Name="ID_SUBE" Type="int" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_fatura">
+          <Key>
+            <PropertyRef Name="ID_FATURA" />
+          </Key>
+          <Property Name="ID_FATURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_DEPO" Type="int" />
+          <Property Name="ID_FATURA_TIP" Type="int" />
+          <Property Name="ID_ODEMETUR" Type="int" />
+          <Property Name="FATURA_NO" Type="varchar" MaxLength="100" />
+          <Property Name="ID_CARIKART" Type="int" />
+          <Property Name="ACIKLAMA" Type="varchar" MaxLength="500" />
+          <Property Name="TOPLAM_BIRIM_FIYAT" Type="float" />
+          <Property Name="TOPLAM_ISKONTOTUTARI" Type="float" />
+          <Property Name="TOPLAM_KDV_TUTARI" Type="float" />
+          <Property Name="GENEL_ISKONTO_TUTARI" Type="float" />
+          <Property Name="GENEL_ISKONTO_ACIKLAMA" Type="float" />
+          <Property Name="GENEL_TOPLAM" Type="float" />
+          <Property Name="KAYIT_TARIHI" Type="datetime" />
+          <Property Name="ID_EKLEYEN_KULLANICI" Type="int" />
+          <Property Name="IPTAL" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_fatura_detay">
+          <Key>
+            <PropertyRef Name="ID_FATURADETAY" />
+          </Key>
+          <Property Name="ID_FATURADETAY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_FATURA" Type="int" />
+          <Property Name="BIRIM_FIYAT" Type="float" />
+          <Property Name="ISKONTOTUTARI" Type="float" />
+          <Property Name="KDVSIZ_SATIS_FIYATI" Type="float" />
+          <Property Name="KDV_ORANI" Type="float" />
+          <Property Name="KDV_TUTARI" Type="float" />
+          <Property Name="SATIS_FIYAT" Type="float" />
+          <Property Name="MIKTAR" Type="int" />
+          <Property Name="TOPLAM_TUTAR" Type="bit" />
+          <Property Name="IPTAL" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_fatura_tip">
+          <Key>
+            <PropertyRef Name="ID_FATURA_TIP" />
+          </Key>
+          <Property Name="ID_FATURA_TIP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_kullanici">
+          <Key>
+            <PropertyRef Name="ID_KULLANICI" />
+          </Key>
+          <Property Name="ID_KULLANICI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TC_KIMLIK_NO" Type="varchar" MaxLength="11" />
+          <Property Name="AD" Type="varchar" MaxLength="100" />
+          <Property Name="SOYAD" Type="varchar" MaxLength="100" />
+          <Property Name="KULLANICI_AD" Type="varchar" MaxLength="100" />
+          <Property Name="SIFRE" Type="varchar" MaxLength="100" />
+          <Property Name="TEL_NO" Type="varchar" MaxLength="12" />
+          <Property Name="E_POSTA" Type="varchar" MaxLength="100" />
+          <Property Name="GUVENLIK_CEVABI" Type="varchar" MaxLength="150" />
+          <Property Name="ID_ROL" Type="int" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_kullanici_sube">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID_SIRKET" Type="int" />
+          <Property Name="ID_SUBE" Type="int" />
+          <Property Name="ID_KULLANICI" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_menu">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+          </Key>
+          <Property Name="ID_MENU" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="URL" Type="varchar" MaxLength="100" />
+          <Property Name="KOD" Type="varchar" MaxLength="50" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_rol">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="100" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_rol_menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID_MENU" Type="int" />
+          <Property Name="ID_ROL" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_sirket">
+          <Key>
+            <PropertyRef Name="ID_SIRKET" />
+          </Key>
+          <Property Name="ID_SIRKET" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="VERGI_DAIRESI" Type="varchar" MaxLength="200" />
+          <Property Name="VERGI_NUMARASI" Type="varchar" MaxLength="50" />
+          <Property Name="UNVAN" Type="varchar" MaxLength="100" />
+          <Property Name="TELEFON" Type="varchar" MaxLength="11" />
+          <Property Name="ADRES" Type="varchar" MaxLength="300" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_sube">
+          <Key>
+            <PropertyRef Name="ID_SUBE" />
+          </Key>
+          <Property Name="ID_SUBE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="TELEFON" Type="varchar" MaxLength="11" />
+          <Property Name="FAX" Type="varchar" MaxLength="11" />
+          <Property Name="E_POSTA" Type="varchar" MaxLength="100" />
+          <Property Name="ADRES" Type="varchar" MaxLength="200" />
+          <Property Name="ID_ILCE" Type="int" />
+          <Property Name="ID_SIRKET" Type="int" />
+          <Property Name="ID_EKLEYEN_KULLANICI" Type="int" />
+          <Property Name="EKLEME_TARIHI" Type="datetime" />
+          <Property Name="ID_DUZENLEYEN" Type="int" />
+          <Property Name="DUZENLEME_TARIHI" Type="datetime" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_urun">
+          <Key>
+            <PropertyRef Name="ID_URUN" />
+          </Key>
+          <Property Name="ID_URUN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URUN_AD" Type="varchar" MaxLength="100" />
+          <Property Name="URUN_BARKOD" Type="varchar" MaxLength="100" />
+          <Property Name="ID_KATEGORI" Type="int" />
+          <Property Name="URUN_BIRIM" Type="int" />
+          <Property Name="MIKTARI" Type="int" />
+          <Property Name="ALIS_FIYAT" Type="float" />
+          <Property Name="BIRIM_FIYAT" Type="float" />
+          <Property Name="ISKONTO_TUTAR" Type="float" />
+          <Property Name="KDVSIZ_SATIS_FIYAT" Type="float" />
+          <Property Name="KDV_ORANI" Type="float" />
+          <Property Name="KDV_TUTARI" Type="float" />
+          <Property Name="SATIS_FIYATI" Type="float" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_urun_birim">
+          <Key>
+            <PropertyRef Name="ID_URUN_BIRIM" />
+          </Key>
+          <Property Name="ID_URUN_BIRIM" Type="int" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_urun_kategori">
+          <Key>
+            <PropertyRef Name="ID_KATEGORI" />
+          </Key>
+          <Property Name="ID_KATEGORI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="UST_KATEGORI" Type="int" />
+          <Property Name="ID_SUBE" Type="int" />
+          <Property Name="ID_EKLEYEN_KULLANICI" Type="int" />
+          <Property Name="EKLEME_TARHI" Type="datetime" />
+          <Property Name="ID_DUZENLEYEN" Type="int" />
+          <Property Name="DUZENLEME_TARIHI" Type="datetime" />
+          <Property Name="SILINDI" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="DepoDbModelStoreContainer">
+          <EntitySet Name="tbl_cari_tur" EntityType="Self.tbl_cari_tur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_depo" EntityType="Self.tbl_depo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_fatura" EntityType="Self.tbl_fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_fatura_detay" EntityType="Self.tbl_fatura_detay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_fatura_tip" EntityType="Self.tbl_fatura_tip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_kullanici" EntityType="Self.tbl_kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_kullanici_sube" EntityType="Self.tbl_kullanici_sube" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_menu" EntityType="Self.tbl_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_rol" EntityType="Self.tbl_rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_rol_menu" EntityType="Self.tbl_rol_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_sirket" EntityType="Self.tbl_sirket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_sube" EntityType="Self.tbl_sube" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_urun" EntityType="Self.tbl_urun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_urun_birim" EntityType="Self.tbl_urun_birim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_urun_kategori" EntityType="Self.tbl_urun_kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_cari" EntityType="Self.tbl_cari" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_cari].[ID_CARI] AS [ID_CARI], 
+    [tbl_cari].[ID_CARI_TUR] AS [ID_CARI_TUR], 
+    [tbl_cari].[AD] AS [AD], 
+    [tbl_cari].[SOYAD] AS [SOYAD], 
+    [tbl_cari].[TC_KIMLIK_NO] AS [TC_KIMLIK_NO], 
+    [tbl_cari].[TEL_NO] AS [TEL_NO], 
+    [tbl_cari].[EKLEYEN_KULLANICI] AS [EKLEYEN_KULLANICI], 
+    [tbl_cari].[EKLEME_TARIHI] AS [EKLEME_TARIHI], 
+    [tbl_cari].[ID_DUZENLEYEN] AS [ID_DUZENLEYEN], 
+    [tbl_cari].[E_POSTA] AS [E_POSTA], 
+    [tbl_cari].[DUZENLEME_TARIHI] AS [DUZENLEME_TARIHI], 
+    [tbl_cari].[SILINDI] AS [SILINDI]
+    FROM [dbo].[tbl_cari] AS [tbl_cari]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DepoDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_cari_tur">
+          <Key>
+            <PropertyRef Name="ID_CARI_TUR" />
+          </Key>
+          <Property Name="ID_CARI_TUR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_depo">
+          <Key>
+            <PropertyRef Name="ID_DEPO" />
+          </Key>
+          <Property Name="ID_DEPO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="E_POSTA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ADRES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_EKLEYEN" Type="Int32" />
+          <Property Name="EKLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="ID_DUZENLEYEN" Type="Int32" />
+          <Property Name="DUZENLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="ID_SUBE" Type="Int32" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_fatura">
+          <Key>
+            <PropertyRef Name="ID_FATURA" />
+          </Key>
+          <Property Name="ID_FATURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_DEPO" Type="Int32" />
+          <Property Name="ID_FATURA_TIP" Type="Int32" />
+          <Property Name="ID_ODEMETUR" Type="Int32" />
+          <Property Name="FATURA_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CARIKART" Type="Int32" />
+          <Property Name="ACIKLAMA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TOPLAM_BIRIM_FIYAT" Type="Double" />
+          <Property Name="TOPLAM_ISKONTOTUTARI" Type="Double" />
+          <Property Name="TOPLAM_KDV_TUTARI" Type="Double" />
+          <Property Name="GENEL_ISKONTO_TUTARI" Type="Double" />
+          <Property Name="GENEL_ISKONTO_ACIKLAMA" Type="Double" />
+          <Property Name="GENEL_TOPLAM" Type="Double" />
+          <Property Name="KAYIT_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="ID_EKLEYEN_KULLANICI" Type="Int32" />
+          <Property Name="IPTAL" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_fatura_detay">
+          <Key>
+            <PropertyRef Name="ID_FATURADETAY" />
+          </Key>
+          <Property Name="ID_FATURADETAY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_FATURA" Type="Int32" />
+          <Property Name="BIRIM_FIYAT" Type="Double" />
+          <Property Name="ISKONTOTUTARI" Type="Double" />
+          <Property Name="KDVSIZ_SATIS_FIYATI" Type="Double" />
+          <Property Name="KDV_ORANI" Type="Double" />
+          <Property Name="KDV_TUTARI" Type="Double" />
+          <Property Name="SATIS_FIYAT" Type="Double" />
+          <Property Name="MIKTAR" Type="Int32" />
+          <Property Name="TOPLAM_TUTAR" Type="Boolean" />
+          <Property Name="IPTAL" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_fatura_tip">
+          <Key>
+            <PropertyRef Name="ID_FATURA_TIP" />
+          </Key>
+          <Property Name="ID_FATURA_TIP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_kullanici">
+          <Key>
+            <PropertyRef Name="ID_KULLANICI" />
+          </Key>
+          <Property Name="ID_KULLANICI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TC_KIMLIK_NO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SOYAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KULLANICI_AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SIFRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TEL_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="E_POSTA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GUVENLIK_CEVABI" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ROL" Type="Int32" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_kullanici_sube">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_SIRKET" Type="Int32" />
+          <Property Name="ID_SUBE" Type="Int32" />
+          <Property Name="ID_KULLANICI" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_menu">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+          </Key>
+          <Property Name="ID_MENU" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KOD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_rol">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_rol_menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_MENU" Type="Int32" />
+          <Property Name="ID_ROL" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_sirket">
+          <Key>
+            <PropertyRef Name="ID_SIRKET" />
+          </Key>
+          <Property Name="ID_SIRKET" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VERGI_DAIRESI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERGI_NUMARASI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UNVAN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="ADRES" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_sube">
+          <Key>
+            <PropertyRef Name="ID_SUBE" />
+          </Key>
+          <Property Name="ID_SUBE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="E_POSTA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ADRES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ILCE" Type="Int32" />
+          <Property Name="ID_SIRKET" Type="Int32" />
+          <Property Name="ID_EKLEYEN_KULLANICI" Type="Int32" />
+          <Property Name="EKLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="ID_DUZENLEYEN" Type="Int32" />
+          <Property Name="DUZENLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_urun">
+          <Key>
+            <PropertyRef Name="ID_URUN" />
+          </Key>
+          <Property Name="ID_URUN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URUN_AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="URUN_BARKOD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_KATEGORI" Type="Int32" />
+          <Property Name="URUN_BIRIM" Type="Int32" />
+          <Property Name="MIKTARI" Type="Int32" />
+          <Property Name="ALIS_FIYAT" Type="Double" />
+          <Property Name="BIRIM_FIYAT" Type="Double" />
+          <Property Name="ISKONTO_TUTAR" Type="Double" />
+          <Property Name="KDVSIZ_SATIS_FIYAT" Type="Double" />
+          <Property Name="KDV_ORANI" Type="Double" />
+          <Property Name="KDV_TUTARI" Type="Double" />
+          <Property Name="SATIS_FIYATI" Type="Double" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_urun_birim">
+          <Key>
+            <PropertyRef Name="ID_URUN_BIRIM" />
+          </Key>
+          <Property Name="ID_URUN_BIRIM" Type="Int32" Nullable="false" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_urun_kategori">
+          <Key>
+            <PropertyRef Name="ID_KATEGORI" />
+          </Key>
+          <Property Name="ID_KATEGORI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UST_KATEGORI" Type="Int32" />
+          <Property Name="ID_SUBE" Type="Int32" />
+          <Property Name="ID_EKLEYEN_KULLANICI" Type="Int32" />
+          <Property Name="EKLEME_TARHI" Type="DateTime" Precision="3" />
+          <Property Name="ID_DUZENLEYEN" Type="Int32" />
+          <Property Name="DUZENLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_cari">
+          <Key>
+            <PropertyRef Name="ID_CARI" />
+          </Key>
+          <Property Name="ID_CARI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CARI_TUR" Type="Int32" />
+          <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SOYAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TC_KIMLIK_NO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="TEL_NO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="EKLEYEN_KULLANICI" Type="Int32" />
+          <Property Name="EKLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="ID_DUZENLEYEN" Type="Int32" />
+          <Property Name="E_POSTA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DUZENLEME_TARIHI" Type="DateTime" Precision="3" />
+          <Property Name="SILINDI" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="DepoDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_cari_tur" EntityType="Self.tbl_cari_tur" />
+          <EntitySet Name="tbl_depo" EntityType="Self.tbl_depo" />
+          <EntitySet Name="tbl_fatura" EntityType="Self.tbl_fatura" />
+          <EntitySet Name="tbl_fatura_detay" EntityType="Self.tbl_fatura_detay" />
+          <EntitySet Name="tbl_fatura_tip" EntityType="Self.tbl_fatura_tip" />
+          <EntitySet Name="tbl_kullanici" EntityType="Self.tbl_kullanici" />
+          <EntitySet Name="tbl_kullanici_sube" EntityType="Self.tbl_kullanici_sube" />
+          <EntitySet Name="tbl_menu" EntityType="Self.tbl_menu" />
+          <EntitySet Name="tbl_rol" EntityType="Self.tbl_rol" />
+          <EntitySet Name="tbl_rol_menu" EntityType="Self.tbl_rol_menu" />
+          <EntitySet Name="tbl_sirket" EntityType="Self.tbl_sirket" />
+          <EntitySet Name="tbl_sube" EntityType="Self.tbl_sube" />
+          <EntitySet Name="tbl_urun" EntityType="Self.tbl_urun" />
+          <EntitySet Name="tbl_urun_birim" EntityType="Self.tbl_urun_birim" />
+          <EntitySet Name="tbl_urun_kategori" EntityType="Self.tbl_urun_kategori" />
+          <EntitySet Name="tbl_cari" EntityType="Self.tbl_cari" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DepoDbModelStoreContainer" CdmEntityContainer="DepoDbEntities">
+          <EntitySetMapping Name="tbl_cari_tur">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_cari_tur">
+              <MappingFragment StoreEntitySet="tbl_cari_tur">
+                <ScalarProperty Name="ID_CARI_TUR" ColumnName="ID_CARI_TUR" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_depo">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_depo">
+              <MappingFragment StoreEntitySet="tbl_depo">
+                <ScalarProperty Name="ID_DEPO" ColumnName="ID_DEPO" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="E_POSTA" ColumnName="E_POSTA" />
+                <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+                <ScalarProperty Name="ID_EKLEYEN" ColumnName="ID_EKLEYEN" />
+                <ScalarProperty Name="EKLEME_TARIHI" ColumnName="EKLEME_TARIHI" />
+                <ScalarProperty Name="ID_DUZENLEYEN" ColumnName="ID_DUZENLEYEN" />
+                <ScalarProperty Name="DUZENLEME_TARIHI" ColumnName="DUZENLEME_TARIHI" />
+                <ScalarProperty Name="ID_SUBE" ColumnName="ID_SUBE" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_fatura">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_fatura">
+              <MappingFragment StoreEntitySet="tbl_fatura">
+                <ScalarProperty Name="ID_FATURA" ColumnName="ID_FATURA" />
+                <ScalarProperty Name="ID_DEPO" ColumnName="ID_DEPO" />
+                <ScalarProperty Name="ID_FATURA_TIP" ColumnName="ID_FATURA_TIP" />
+                <ScalarProperty Name="ID_ODEMETUR" ColumnName="ID_ODEMETUR" />
+                <ScalarProperty Name="FATURA_NO" ColumnName="FATURA_NO" />
+                <ScalarProperty Name="ID_CARIKART" ColumnName="ID_CARIKART" />
+                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+                <ScalarProperty Name="TOPLAM_BIRIM_FIYAT" ColumnName="TOPLAM_BIRIM_FIYAT" />
+                <ScalarProperty Name="TOPLAM_ISKONTOTUTARI" ColumnName="TOPLAM_ISKONTOTUTARI" />
+                <ScalarProperty Name="TOPLAM_KDV_TUTARI" ColumnName="TOPLAM_KDV_TUTARI" />
+                <ScalarProperty Name="GENEL_ISKONTO_TUTARI" ColumnName="GENEL_ISKONTO_TUTARI" />
+                <ScalarProperty Name="GENEL_ISKONTO_ACIKLAMA" ColumnName="GENEL_ISKONTO_ACIKLAMA" />
+                <ScalarProperty Name="GENEL_TOPLAM" ColumnName="GENEL_TOPLAM" />
+                <ScalarProperty Name="KAYIT_TARIHI" ColumnName="KAYIT_TARIHI" />
+                <ScalarProperty Name="ID_EKLEYEN_KULLANICI" ColumnName="ID_EKLEYEN_KULLANICI" />
+                <ScalarProperty Name="IPTAL" ColumnName="IPTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_fatura_detay">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_fatura_detay">
+              <MappingFragment StoreEntitySet="tbl_fatura_detay">
+                <ScalarProperty Name="ID_FATURADETAY" ColumnName="ID_FATURADETAY" />
+                <ScalarProperty Name="ID_FATURA" ColumnName="ID_FATURA" />
+                <ScalarProperty Name="BIRIM_FIYAT" ColumnName="BIRIM_FIYAT" />
+                <ScalarProperty Name="ISKONTOTUTARI" ColumnName="ISKONTOTUTARI" />
+                <ScalarProperty Name="KDVSIZ_SATIS_FIYATI" ColumnName="KDVSIZ_SATIS_FIYATI" />
+                <ScalarProperty Name="KDV_ORANI" ColumnName="KDV_ORANI" />
+                <ScalarProperty Name="KDV_TUTARI" ColumnName="KDV_TUTARI" />
+                <ScalarProperty Name="SATIS_FIYAT" ColumnName="SATIS_FIYAT" />
+                <ScalarProperty Name="MIKTAR" ColumnName="MIKTAR" />
+                <ScalarProperty Name="TOPLAM_TUTAR" ColumnName="TOPLAM_TUTAR" />
+                <ScalarProperty Name="IPTAL" ColumnName="IPTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_fatura_tip">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_fatura_tip">
+              <MappingFragment StoreEntitySet="tbl_fatura_tip">
+                <ScalarProperty Name="ID_FATURA_TIP" ColumnName="ID_FATURA_TIP" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_kullanici">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_kullanici">
+              <MappingFragment StoreEntitySet="tbl_kullanici">
+                <ScalarProperty Name="ID_KULLANICI" ColumnName="ID_KULLANICI" />
+                <ScalarProperty Name="TC_KIMLIK_NO" ColumnName="TC_KIMLIK_NO" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SOYAD" ColumnName="SOYAD" />
+                <ScalarProperty Name="KULLANICI_AD" ColumnName="KULLANICI_AD" />
+                <ScalarProperty Name="SIFRE" ColumnName="SIFRE" />
+                <ScalarProperty Name="TEL_NO" ColumnName="TEL_NO" />
+                <ScalarProperty Name="E_POSTA" ColumnName="E_POSTA" />
+                <ScalarProperty Name="GUVENLIK_CEVABI" ColumnName="GUVENLIK_CEVABI" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_kullanici_sube">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_kullanici_sube">
+              <MappingFragment StoreEntitySet="tbl_kullanici_sube">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_SIRKET" ColumnName="ID_SIRKET" />
+                <ScalarProperty Name="ID_SUBE" ColumnName="ID_SUBE" />
+                <ScalarProperty Name="ID_KULLANICI" ColumnName="ID_KULLANICI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_menu">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_menu">
+              <MappingFragment StoreEntitySet="tbl_menu">
+                <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="KOD" ColumnName="KOD" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_rol">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_rol">
+              <MappingFragment StoreEntitySet="tbl_rol">
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_rol_menu">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_rol_menu">
+              <MappingFragment StoreEntitySet="tbl_rol_menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sirket">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_sirket">
+              <MappingFragment StoreEntitySet="tbl_sirket">
+                <ScalarProperty Name="ID_SIRKET" ColumnName="ID_SIRKET" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="VERGI_DAIRESI" ColumnName="VERGI_DAIRESI" />
+                <ScalarProperty Name="VERGI_NUMARASI" ColumnName="VERGI_NUMARASI" />
+                <ScalarProperty Name="UNVAN" ColumnName="UNVAN" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sube">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_sube">
+              <MappingFragment StoreEntitySet="tbl_sube">
+                <ScalarProperty Name="ID_SUBE" ColumnName="ID_SUBE" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="E_POSTA" ColumnName="E_POSTA" />
+                <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+                <ScalarProperty Name="ID_ILCE" ColumnName="ID_ILCE" />
+                <ScalarProperty Name="ID_SIRKET" ColumnName="ID_SIRKET" />
+                <ScalarProperty Name="ID_EKLEYEN_KULLANICI" ColumnName="ID_EKLEYEN_KULLANICI" />
+                <ScalarProperty Name="EKLEME_TARIHI" ColumnName="EKLEME_TARIHI" />
+                <ScalarProperty Name="ID_DUZENLEYEN" ColumnName="ID_DUZENLEYEN" />
+                <ScalarProperty Name="DUZENLEME_TARIHI" ColumnName="DUZENLEME_TARIHI" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_urun">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_urun">
+              <MappingFragment StoreEntitySet="tbl_urun">
+                <ScalarProperty Name="ID_URUN" ColumnName="ID_URUN" />
+                <ScalarProperty Name="URUN_AD" ColumnName="URUN_AD" />
+                <ScalarProperty Name="URUN_BARKOD" ColumnName="URUN_BARKOD" />
+                <ScalarProperty Name="ID_KATEGORI" ColumnName="ID_KATEGORI" />
+                <ScalarProperty Name="URUN_BIRIM" ColumnName="URUN_BIRIM" />
+                <ScalarProperty Name="MIKTARI" ColumnName="MIKTARI" />
+                <ScalarProperty Name="ALIS_FIYAT" ColumnName="ALIS_FIYAT" />
+                <ScalarProperty Name="BIRIM_FIYAT" ColumnName="BIRIM_FIYAT" />
+                <ScalarProperty Name="ISKONTO_TUTAR" ColumnName="ISKONTO_TUTAR" />
+                <ScalarProperty Name="KDVSIZ_SATIS_FIYAT" ColumnName="KDVSIZ_SATIS_FIYAT" />
+                <ScalarProperty Name="KDV_ORANI" ColumnName="KDV_ORANI" />
+                <ScalarProperty Name="KDV_TUTARI" ColumnName="KDV_TUTARI" />
+                <ScalarProperty Name="SATIS_FIYATI" ColumnName="SATIS_FIYATI" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_urun_birim">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_urun_birim">
+              <MappingFragment StoreEntitySet="tbl_urun_birim">
+                <ScalarProperty Name="ID_URUN_BIRIM" ColumnName="ID_URUN_BIRIM" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_urun_kategori">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_urun_kategori">
+              <MappingFragment StoreEntitySet="tbl_urun_kategori">
+                <ScalarProperty Name="ID_KATEGORI" ColumnName="ID_KATEGORI" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="UST_KATEGORI" ColumnName="UST_KATEGORI" />
+                <ScalarProperty Name="ID_SUBE" ColumnName="ID_SUBE" />
+                <ScalarProperty Name="ID_EKLEYEN_KULLANICI" ColumnName="ID_EKLEYEN_KULLANICI" />
+                <ScalarProperty Name="EKLEME_TARHI" ColumnName="EKLEME_TARHI" />
+                <ScalarProperty Name="ID_DUZENLEYEN" ColumnName="ID_DUZENLEYEN" />
+                <ScalarProperty Name="DUZENLEME_TARIHI" ColumnName="DUZENLEME_TARIHI" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_cari">
+            <EntityTypeMapping TypeName="DepoDbModel.tbl_cari">
+              <MappingFragment StoreEntitySet="tbl_cari">
+                <ScalarProperty Name="ID_CARI" ColumnName="ID_CARI" />
+                <ScalarProperty Name="ID_CARI_TUR" ColumnName="ID_CARI_TUR" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SOYAD" ColumnName="SOYAD" />
+                <ScalarProperty Name="TC_KIMLIK_NO" ColumnName="TC_KIMLIK_NO" />
+                <ScalarProperty Name="TEL_NO" ColumnName="TEL_NO" />
+                <ScalarProperty Name="EKLEYEN_KULLANICI" ColumnName="EKLEYEN_KULLANICI" />
+                <ScalarProperty Name="EKLEME_TARIHI" ColumnName="EKLEME_TARIHI" />
+                <ScalarProperty Name="ID_DUZENLEYEN" ColumnName="ID_DUZENLEYEN" />
+                <ScalarProperty Name="E_POSTA" ColumnName="E_POSTA" />
+                <ScalarProperty Name="DUZENLEME_TARIHI" ColumnName="DUZENLEME_TARIHI" />
+                <ScalarProperty Name="SILINDI" ColumnName="SILINDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
